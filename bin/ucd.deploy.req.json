@@ -1,0 +1,10 @@
+{
+  "application": "79c63b0b-31a0-4e1d-8129-855bd41aa4f2",
+  "applicationProcess": "e908406a-da60-4d58-a434-2447238db06c",
+  "environment": "17bd6588-1082-4b8f-b29b-39d429906acf",
+  "onlyChanged": "false",
+  "versions": [{
+    "component": "0baaa6d3-dbc5-4e29-84f9-95a050ffed3d",
+    "version": "latest"
+  }]
+}

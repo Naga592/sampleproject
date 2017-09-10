@@ -1,0 +1,50 @@
+<?xml version="1.0" ?> 
+<project name="AntExample" default="ear" basedir=".">
+	
+  <description>
+        simple example build file
+  </description>
+  <!-- set global properties for this build -->
+  <property name="src" location="./SampleApp/src"/>
+  <property name="build" location="./build"/>
+  <property name="dist"  location="./dist"/>
+  
+	<path id="compile.classpath">
+		<fileset dir="./SampleApp/WebContent/WEB-INF/lib">
+			<include name="*.jar"/>
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${dist}" />
+		<delete dir="${build}" />
+	</target>
+	
+	<target name="init" depends="clean">
+		<mkdir dir="${build}/classes"/>
+		<mkdir dir="${dist}" />
+	</target>
+	
+	<target name="compile" depends="init" >
+		<javac destdir="${build}/classes" debug="true" srcdir="${src}" source="1.7" target="1.7" >
+			<classpath refid="compile.classpath"/>
+		</javac>
+	</target>
+	
+	<target name="war" depends="compile">
+		<war destfile="${build}/SampleApp.war" webxml="./SampleApp/WebContent/WEB-INF/web.xml">
+			<fileset dir="./SampleApp/WebContent">
+				<include name="*.html"/>
+				<include name="**/*.xml"/>
+				<exclude name="**/*.jar"/>
+			</fileset>
+			<lib dir="./SampleApp/WebContent/WEB-INF/lib"/>
+			<classes dir="${build}/classes"/>
+		</war>
+	</target>
+	<target name="ear" depends="war">
+		<ear destfile="dist/SampleAppEAR.ear" appxml="./SampleAppEAR/META-INF/application.xml">
+	      <fileset dir="${build}" includes="*.war"/>
+	    </ear>
+	</target>	
+</project>
